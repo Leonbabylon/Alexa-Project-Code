@@ -1,0 +1,2 @@
+HelloName fact
+HelloName i am {firstname}
