@@ -1,31 +1,49 @@
+
 {
   "intents": [
-    {
-      "intent": "AMAZON.CancelIntent"
-    },
-    {
-      "intent": "AMAZON.HelpIntent"
-    },
-    {
-      "intent": "AMAZON.PauseIntent"
-    },
-    {
-      "intent": "AMAZON.ResumeIntent"
-    },
-    {
-      "intent": "AMAZON.StopIntent"
-    },
-    {
-      "intent": "TestIntent"
-    },
-    {
-      "slots": [
+  {
+    "intent": "AMAZON.CancelIntent"
+  },
+  {
+    "intent": "AMAZON.HelpIntent"
+  },
+  {
+    "intent": "AMAZON.PauseIntent"
+  },
+  {
+    "intent": "AMAZON.ResumeIntent"
+  },
+  {
+    "intent": "AMAZON.StopIntent"
+  },
+  {
+    "intent": "Test",
+    "slots": [
         {
-          "name": "firstname",
-          "type": "AMAZON.GB_FIRST_NAME"
+          "name": "itema",
+          "type": "LITERAL"
+        },
+        {
+          "name": "itemb",
+          "type": "LITERAL"
+        },
+        {
+          "name": "itemc",
+          "type": "LITERAL"
+        },
+        {
+          "name": "itemd",
+          "type": "LITERAL"
+        },
+        {
+          "name": "iteme",
+          "type": "LITERAL"
+        },
+        {
+          "name": "itemf",
+          "type": "LITERAL"
         }
-      ],
-      "intent": "HelloName"
+      ]
     }
   ]
 }
