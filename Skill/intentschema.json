@@ -17,7 +17,7 @@
     "intent": "AMAZON.StopIntent"
   },
   {
-    "intent": "Test",
+    "intent": "HelloName",
     "slots": [
         {
           "name": "itema",
