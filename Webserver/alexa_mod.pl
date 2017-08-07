@@ -72,7 +72,7 @@ signature_pow(Sig, Exp, P, Pow) :-
 	number_string(P3,NewString),
 	portray_clause(myout,'P number as dec:'),
 	portray_clause(myout,P3),
-        Pow #= SigNumber^Exp mod P3,
+	        Pow #= SigNumber^Exp mod P3,
 	portray_clause(myout,'Pow'),
 	portray_clause(myout,Pow),
 	portray_clause(myout,verified).
@@ -95,7 +95,7 @@ checkcertvalid_time(Acert):-
 	Now #<NotAfter.
 
 checkchain(Chain):-
-        length(Chain,L),
+        	length(Chain,L),
 	L#>1.			%Insure chain has more than one cert
 	%portray_clause(myout,Chain),
 	checkchain_h(Chain).
