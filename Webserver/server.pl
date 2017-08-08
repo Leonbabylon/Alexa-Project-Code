@@ -96,10 +96,16 @@ intent_dictOut("question",DictIn,DictOut):-
 	 my_json_answer(Value,DictOut)
 	).
 
+
 */
+intent_dictOut("haha",_,DictOut):-
+	weirdstuff(Haha),
+	my_json_answer(Haha,DictOut).
+
+
 intent_dictOut(_,_,DictOut):-
 	my_json_answer('Error parsing',DictOut).
-/*
+/*\
 prove_question(Query,SessionId,Answer):-
 	findall(Rule,sessionid_fact(SessionId,Rule),Rulebase),
 	prove_rb(Query,Rulebase),
@@ -133,6 +139,8 @@ go:-
 answers(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
 
+weirdstuff(X):-
+	X = "haha".
 
 /*
 string_rule(String,Rule):-
