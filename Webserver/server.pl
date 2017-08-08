@@ -1,6 +1,7 @@
 :- use_module(library(http/http_unix_daemon)).
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
+:- use_module(library(http/http_json)).
 
 :- dynamic sessionid_fact/2. %hmmm
 :- dynamic '$copy'/1.				 %hmmm
@@ -125,7 +126,8 @@ my_json_answer(Message,X):-
 
 	     }.
 
-
+go:-
+	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Walter"}}}).
 
 
 
