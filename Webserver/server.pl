@@ -53,6 +53,8 @@ get_intent(DictIn,IntentName):-
 * 3. Make the json responce
 */
 
+intent_dictOut("smell",_,DictOut):-
+	my_json_answer("lina sucks at mario kart", DictOut).
 
 intent_dictOut("getANewFact",_,DictOut):-
 	answers(RandomMessage),
@@ -113,7 +115,6 @@ get_id(Dict,Id):-
 	get_dict(applicationId,ApplicationObject,Id).
 
 application_id(X):-
-	%X= "amzn1.ask.skill.a27eb505-fcef-49bf-8975-3e1a6d7b7c74".
 	X= "amzn1.ask.skill.dcc7c1a0-8ac6-4bd1-8ba1-78a56e8313c4".
 
 my_json_answer(Message,X):-
