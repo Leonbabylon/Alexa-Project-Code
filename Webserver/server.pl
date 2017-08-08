@@ -130,6 +130,9 @@ my_json_answer(Message,X):-
 go:-
 	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Walter"}}}).
 
+answers(X):-
+	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
+
 
 
 string_rule(String,Rule):-
