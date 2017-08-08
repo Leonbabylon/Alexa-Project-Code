@@ -10,8 +10,8 @@
 
 :- http_handler(/, alexa, [prefix]).
 
-%handle_request(_Request) :-
-%	alexa(Request).
+handle_request(_Request) :-
+	alexa(Request).
 
 
 alexa(Request):-
@@ -59,7 +59,7 @@ intent_dictOut("smell",_,DictOut):-
 intent_dictOut("getANewFact",_,DictOut):-
 	answers(RandomMessage),
 	my_json_answer(RandomMessage,DictOut).
-
+/*
 intent_dictOut("remember",DictIn,DictOut):-
 	get_dict(session,DictIn,SessionObject),
 	get_dict(sessionId,SessionObject,SessionId),
@@ -96,17 +96,17 @@ intent_dictOut("question",DictIn,DictOut):-
 	 my_json_answer(Value,DictOut)
 	).
 
-
+*/
 intent_dictOut(_,_,DictOut):-
 	my_json_answer('Error parsing',DictOut).
-
+/*
 prove_question(Query,SessionId,Answer):-
 	findall(Rule,sessionid_fact(SessionId,Rule),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
 	atomics_to_string(AnswerAtomList," ",Answer).
-
+*/
 
 
 get_id(Dict,Id):-
@@ -126,15 +126,15 @@ my_json_answer(Message,X):-
               version:"1.0"
 
 	     }.
-
+/*
 go:-
 	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Walter"}}}).
-
+*/
 answers(X):-
 	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
 
 
-
+/*
 string_rule(String,Rule):-
 	string_lower(String,StringL),
 	split_string(StringL," ","",Split),
@@ -214,3 +214,4 @@ my_copy_term(Old,_New):-
 my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
+*/
