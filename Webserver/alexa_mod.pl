@@ -16,6 +16,7 @@ handle_dict(DictIn,DictOut) :-
 	setup_call_cleanup(
 			   open('recieved.txt',append,Stream,[]),
 			   (get_id(DictIn,Id),
+				  print(Id),
 			    format(Stream,"Id: ~w\n",[Id])),
 			   close(Stream)
 			  ),
