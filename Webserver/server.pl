@@ -14,7 +14,6 @@
 handle_request(_Request) :-
 	alexa(Request).
 
-
 alexa(Request):-
 	http_read_json_dict(Request,DictIn),
 	handle_dict(DictIn,DictOut),
@@ -60,7 +59,7 @@ intent_dictOut("smell",_,DictOut):-
 intent_dictOut("getANewFact",_,DictOut):-
 	answers(RandomMessage),
 	my_json_answer(RandomMessage,DictOut).
-/*
+
 intent_dictOut("remember",DictIn,DictOut):-
 	get_dict(session,DictIn,SessionObject),
 	get_dict(sessionId,SessionObject,SessionId),
@@ -104,16 +103,16 @@ intent_dictOut("haha",_,DictOut):-
 	my_json_answer(Haha,DictOut).
 
 
-%intent_dictOut(_,_,DictOut):-
-%	my_json_answer('Error parsing',DictOut).
-/*\
+intent_dictOut(_,_,DictOut):-
+	my_json_answer('Error parsing',DictOut).
+
 prove_question(Query,SessionId,Answer):-
 	findall(Rule,sessionid_fact(SessionId,Rule),Rulebase),
 	prove_rb(Query,Rulebase),
 	transform(Query,Clauses),
 	phrase(sentence(Clauses),AnswerAtomList),
 	atomics_to_string(AnswerAtomList," ",Answer).
-*/
+
 
 
 get_id(Dict,Id):-
@@ -138,12 +137,12 @@ go:-
 	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Walter"}}}).
 */
 answers(X):-
-	random_member(X,["walruses can weigh up to 1900 kilograms", "There are two species of walrus - Pacific and Atlantic", "Walruses eat molluscs", "Walruses live in herds","Walruses have two large tusks"]).
+	random_member(X,["lina married nick crompton in 2028", "lina likes aubergines", "lina eats molluscum", "linas live in herds","linas have two large tusks"]).
 
 weirdstuff(X):-
 	X = "haha".
 
-/*
+
 string_rule(String,Rule):-
 	string_lower(String,StringL),
 	split_string(StringL," ","",Split),
@@ -183,10 +182,6 @@ question(Q) --> [is], proper_noun(N,X),
 question((Q1,Q2)) --> [are],[some],noun(p,sk=>Q1),
 	property(p,sk=>Q2).
 
-
-
-
-
 prove_rb(true,_Rulebase):-!.
 prove_rb((A,B),Rulebase):-!,
     prove_rb(A,Rulebase),
@@ -212,15 +207,14 @@ get_input(Input):-
 
 show_answer(Answer):-
     write('! '), flush, write(Answer),nl.
-
+/*
 my_copy_term(Old,New):-
     asserta('$copy'(Old)),
     retract('$copy'(New)),!.
 my_copy_term(Old,_New):-
     retract('$copy'(Old)),
     !,fail.
-
+*/
 my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
-*/
