@@ -171,7 +171,7 @@ property(_N,X=>mortal(X)) --> [mortal].
 determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
 determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
 
-proper_noun(s,sam) --> [sam].
+proper_noun(s,leon) --> [leon].
 noun(s,X=>human(X)) --> [human].
 noun(p,X=>human(X)) --> [humans].
 noun(s,X=>living_being(X)) --> [living],[being].
