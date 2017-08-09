@@ -2,6 +2,7 @@
 :- use_module(library(http/thread_httpd)).
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_json)).
+:- use_module(library(random)).
 
 :- dynamic sessionid_fact/2. %hmmm
 :- dynamic '$copy'/1.				 %hmmm
@@ -103,8 +104,8 @@ intent_dictOut("haha",_,DictOut):-
 	my_json_answer(Haha,DictOut).
 
 
-intent_dictOut(_,_,DictOut):-
-	my_json_answer('Error parsing',DictOut).
+%intent_dictOut(_,_,DictOut):-
+%	my_json_answer('Error parsing',DictOut).
 /*\
 prove_question(Query,SessionId,Answer):-
 	findall(Rule,sessionid_fact(SessionId,Rule),Rulebase),
