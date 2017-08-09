@@ -3,6 +3,7 @@
 :- use_module(library(http/http_dispatch)).
 :- use_module(library(http/http_json)).
 :- use_module(library(random)).
+:- use_module(library(listing)).
 
 :- dynamic sessionid_fact/2. %hmmm
 :- dynamic '$copy'/1.				 %hmmm
@@ -25,6 +26,7 @@ handle_dict(DictIn,DictOut) :-
 	setup_call_cleanup(
 			   open('recieved.txt',append,Stream,[]),
 			   (get_id(DictIn,Id),
+				  print(Id),
 			    format(Stream,"Id: ~w\n",[Id])),
 			   close(Stream)
 			  ),
