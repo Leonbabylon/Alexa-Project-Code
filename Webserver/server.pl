@@ -26,7 +26,7 @@ handle_dict(DictIn,DictOut) :-
 	setup_call_cleanup(
 			   open('recieved.txt',append,Stream,[]),
 			   (get_id(DictIn,Id),
-				  print(Id),
+%			    print(Id),
 			    format(Stream,"Id: ~w\n",[Id])),
 			   close(Stream)
 			  ),
@@ -68,7 +68,7 @@ intent_dictOut("remember",DictIn,DictOut):-
 	get_dict(request,DictIn,RequestObject),
 	get_dict(intent,RequestObject,IntentObject),
 	get_dict(slots,IntentObject,SlotsObject),
-	get_dict(mySlot,SlotsObject,MySlotObject),
+	get_dict(rememberSlot,SlotsObject,MySlotObject),
 	get_dict(value,MySlotObject,Value),
 	split_string(Value," ","",StringList),
 	maplist(string_lower,StringList,StringListLow),
@@ -99,7 +99,7 @@ intent_dictOut("question",DictIn,DictOut):-
 	).
 
 
-*/
+
 intent_dictOut("haha",_,DictOut):-
 	weirdstuff(Haha),
 	my_json_answer(Haha,DictOut).
