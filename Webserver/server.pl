@@ -160,22 +160,12 @@ my_json_answer(Message,X):-
               version:"1.0"
 
 	     }.
-/*
-go:-
-	json_write_dict(current_output,_{version:"1.0", shouldEndSession: false, response: _{outputSpeech:_{type: "PlainText", text: "Walter"}}}).
-*/
+
 answers(X):-
 	random_member(X,["lina married nick crompton in 2028", "lina likes aubergines", "lina eats molluscum", "linas live in herds","linas have two large tusks"]).
 
 weirdstuff(X):-
 	X = "haha".
-
-
-string_rule(String,Rule):-
-	string_lower(String,StringL),
-	split_string(StringL," ","",Split),
-	maplist(atom_string,AtomList,Split),
-	phrase(sentence(Rule),AtomList).
 
 
 
@@ -230,18 +220,12 @@ transform((A,B),[(A:-true)|Rest]):-!,
 
 transform(A,[(A:-true)]).
 
+/*
 get_input(Input):-
     write('? '), flush, read(Input).
 
 show_answer(Answer):-
     write('! '), flush, write(Answer),nl.
-/*
-my_copy_term(Old,New):-
-    asserta('$copy'(Old)),
-    retract('$copy'(New)),!.
-my_copy_term(Old,_New):-
-    retract('$copy'(Old)),
-    !,fail.
 */
 my_copy_element(X,Ys):-
     member(X1,Ys),
@@ -280,3 +264,19 @@ my_copy_element(X,Ys):-
 
 		next(A, B, Ls) :- append(_, [A,B|_], Ls).
 		next(A, B, Ls) :- append(_, [B,A|_], Ls).
+
+		nationalities(
+		[ukrainian,englishman,spaniard,norwegian,japanese]
+		).
+		ciggies(
+		[kools,lucky strike,parliaments,chesterfields,old gold]
+		).
+		colours(
+		[red,green,white,blue,yellow]
+		).
+		pets(
+		[fox,dog,horse,snails,zebra]
+		).
+		drinks(
+		[coffee,tea,milk,orange juice,water]
+		).
