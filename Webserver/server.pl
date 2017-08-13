@@ -108,6 +108,8 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(property,SlotsObject,Valuep),
 		downcase_atom(Valuem,MemberLow),
 		dowmcase_atom(Valuep,PropLow),
+		atom_string(Atomember,MemberLow),
+		atom_string(Atoprop,PropLow),
 		%(phrase(sentence(Rule),AtomList) ->
 		 %(assertz(sessionid_fact(SessionId,Rule)),
 		  %my_json_answer(Valuem,DictOut));
