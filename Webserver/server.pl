@@ -106,8 +106,10 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(slots,IntentObject,SlotsObject),
 		get_dict(member,SlotsObject,Valuem),
 		get_dict(property,SlotsObject,Valuep),
+		writeln(user_error,SlotsObject),
+		writeln(user_error,Valuep),
 		writeln(user_error,Valuem),
-		writeln(user_error,Valuep).
+		writeln(user_error,IntentObject).
 
 
 /*
