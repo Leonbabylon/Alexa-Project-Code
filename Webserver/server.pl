@@ -77,7 +77,7 @@ intent_dictOut("remember",DictIn,DictOut):-
 	 (assertz(sessionid_fact(SessionId,Rule)),
 	  my_json_answer(Value,DictOut));
 	  my_json_answer(Value,DictOut)).
-
+/*
 intent_dictOut("question",DictIn,DictOut):-
 	writeln(user_error,walrus),
 	get_dict(session,DictIn,SessionObject),
@@ -96,7 +96,7 @@ intent_dictOut("question",DictIn,DictOut):-
 	  phrase(question(Query),AtomList),prove_question(Query,SessionId,Answer)) ->
 	 my_json_answer(Answer,DictOut);
 	 my_json_answer(Value,DictOut)
-	).
+	).*/
 intent_dictOut("directmember",DictIn,DictOut):-
 		writeln(user_error,fishboy),
 		get_dict(session,DictIn,SessionObject),
@@ -106,10 +106,12 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(slots,IntentObject,SlotsObject),
 		get_dict(member,SlotsObject,Valuem),
 		get_dict(property,SlotsObject,Valuep),
-		writeln(user_error,SlotsObject),
-		writeln(user_error,Valuep),
-		writeln(user_error,Valuem),
-		writeln(user_error,IntentObject).
+		downcase_atom(Valuem,MemberLow),
+		dowmcase_atom(Valuep,PropLow),
+		(phrase(sentence(Rule),AtomList) ->
+		 (assertz(sessionid_fact(SessionId,Rule)),
+		  my_json_answer(Valuem,DictOut));
+		  my_json_answer(Valuem,DictOut)).
 
 
 /*
