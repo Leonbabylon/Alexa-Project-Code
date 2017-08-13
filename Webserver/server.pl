@@ -264,7 +264,7 @@ my_copy_element(X,Ys):-
 
 		next(A, B, Ls) :- append(_, [A,B|_], Ls).
 		next(A, B, Ls) :- append(_, [B,A|_], Ls).
-
+/*
 		nationalities(
 		[ukrainian,englishman,spaniard,norwegian,japanese]
 		).
@@ -280,3 +280,4 @@ my_copy_element(X,Ys):-
 		drinks(
 		[coffee,tea,milk,orange juice,water]
 		).
+*/
