@@ -114,7 +114,7 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		 %(assertz(sessionid_fact(SessionId,Rule)),
 		  %my_json_answer(Valuem,DictOut));
 		  %my_json_answer(Valuem,DictOut)).
-		my_json_answer(Valuem,DictOut).
+		my_json_answer(Atomember,DictOut).
 
 
 /*
