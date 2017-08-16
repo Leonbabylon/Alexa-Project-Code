@@ -277,15 +277,11 @@ my_copy_element(X,Ys):-
 			houses(Hs),
 			member(h(Drinker,_,_,water,_), Hs).
 
-/*houses(Hs) :-
-			% each house in the list Hs of houses is represented as:
-			%      h(Nationality, Pet, Cigarette, Drink, Color)
-			length(Hs, 5),                                            %  1
-			             %  6
-			Hs = [_,_,h(_,_,_,milk,_),_,_],                           %  9
-			Hs = [h(norwegian,_,_,_,_)|_],                            % 10
-			        % 11
-			       % 15
+houses(SessionId,Query,Hs) :-
+			length(Hs, 5),
+			findall(Rule,sessionid_fact(SessionId,Rule,Hs),X),
+
+			%run all asserted facts
 */
 next(A, B, Ls) :- append(_, [A,B|_], Ls).
 next(A, B, Ls) :- append(_, [B,A|_], Ls).
