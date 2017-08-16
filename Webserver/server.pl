@@ -109,6 +109,8 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(property,SlotsObject,Valuep),
 		get_dict(value,Valuem,Member),
 		get_dict(value,Valuep,Property),
+		portray_clause(user_error,Member),
+		portray_clause(user_error,Property),
 		downcase_atom(Member,MemberLow),
 		dowmcase_atom(Property,PropLow),
 		writeln(user_error,hmmm),
