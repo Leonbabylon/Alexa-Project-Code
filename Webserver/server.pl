@@ -217,13 +217,13 @@ transform((A,B),[(A:-true)|Rest]):-!,
 
 transform(A,[(A:-true)]).
 
-/*
+
 get_input(Input):-
     write('? '), flush, read(Input).
 
 show_answer(Answer):-
     write('! '), flush, write(Answer),nl.
-*/
+		
 my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
