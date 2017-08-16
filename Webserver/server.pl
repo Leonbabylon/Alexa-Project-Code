@@ -298,7 +298,7 @@ houses(SessionId,Query,Result) :-
 			findall(Rule,sessionid_fact(SessionId,Rule,Hs),X),
 			writeln(user_error,we_really_out_here),
 			maplist(Hs,X,Hsolved),
-			portray_clause(user_error,Hsolved),
+			portray_clause(user_error,hoho),
 			Result = [].
 
 
