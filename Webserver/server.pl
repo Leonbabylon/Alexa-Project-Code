@@ -165,6 +165,20 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		my_json_answer("location fact accepted",DictOut).
 
 
+intent_dictOut("query",DictIn,DictOut):-
+		writeln(user_error,naga),
+		get_dict(session,DictIn,	SessionObject),
+		get_dict(sessionId,SessionObject,SessionId),
+		get_dict(request,DictIn,RequestObject),
+		get_dict(intent,RequestObject,IntentObject),
+		get_dict(slots,IntentObject,SlotsObject),
+		get_dict(questionSlot,SlotsObject,SlotQ),
+		get_dict(value,SlotQ,ValueQ),
+		string_lower(ValueQ,QLow),
+		atom_string(AtomQ,QLow),
+		houses(SessionId,Query,Hs),            %  6
+
+
 
 
 
@@ -277,9 +291,15 @@ my_copy_element(X,Ys):-
 			houses(Hs),
 			member(h(Drinker,_,_,water,_), Hs).
 
-houses(SessionId,Query,Hs) :-
+houses(SessionId,Query,Result) :-
 			length(Hs, 5),
 			findall(Rule,sessionid_fact(SessionId,Rule,Hs),X),
+			writeln(user_error,we_really_out_here),
+			maplist(Hs,X,Hsolved),
+			portray_clause(user_error,Hsolved),
+			Result = [].
+
+
 
 			%run all asserted facts
 */
