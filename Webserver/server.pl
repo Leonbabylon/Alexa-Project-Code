@@ -138,10 +138,11 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		string_lower(Property,PropLow),
 		atom_string(Atomember,MemberLow),
 		atom_string(Atoprop,PropLow),
-		next_member(Atomember,Atoprop,H1,H2),
+		next_member(Atomember,Atoprop,Z),
+		Z = H1|H2,
 		portray_clause(user_error,H1),
 		portray_clause(user_error,H2),
-		%assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
+		assertz(sessionid_fact(SessionId,next(H1,H2, Hs),Hs)),             %  6
 		writeln(user_error,superok),
 		my_json_answer("neighbour fact accepted",DictOut).
 
