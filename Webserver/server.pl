@@ -139,7 +139,7 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		portray_clause(user_error,hmmm),
 		string_lower(Property,PropLow),
 		portray_clause(user_error,hmmm),
-		atom_string(Atomember,MemberLow)
+		atom_string(Atomember,MemberLow),
 		portray_clause(user_error,hmmm),
 		atom_string(Atoprop,PropLow),
 		portray_clause(user_error,hmmm),
