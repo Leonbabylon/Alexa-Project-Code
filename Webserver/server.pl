@@ -133,7 +133,7 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		get_dict(location,SlotsObject,Valuel),
 		get_dict(value,Valuem,Member),
 		get_dict(value,Valuep,Property),
-		get_dict(value,Valuel,Location),
+		get_dict(value,Valuel,_),
 		string_lower(Member,MemberLow),
 		string_lower(Property,PropLow),
 		atom_string(Atomember,MemberLow),
@@ -176,7 +176,7 @@ intent_dictOut("query",DictIn,DictOut):-
 		get_dict(value,SlotQ,ValueQ),
 		string_lower(ValueQ,QLow),
 		atom_string(AtomQ,QLow),
-		houses(SessionId,Query,Z),            %  6
+		houses(SessionId,AtomQ,Z),            %  6
 		writeln(user_error,ultraOK),
 		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
