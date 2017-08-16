@@ -134,21 +134,37 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		get_dict(value,Valuem,Member),
 		get_dict(value,Valuep,Property),
 		get_dict(value,Valuel,Location),
-		portray_clause(user_error,hmmm),
 		string_lower(Member,MemberLow),
-		portray_clause(user_error,hmmm),
 		string_lower(Property,PropLow),
-		portray_clause(user_error,hmmm),
 		atom_string(Atomember,MemberLow),
-		portray_clause(user_error,hmmm),
 		atom_string(Atoprop,PropLow),
-		portray_clause(user_error,hmmm),
 		next_member(Atomember,Atoprop,(H1|H2)),
-		portray_clause(user_error,H1),
-		portray_clause(user_error,H2),
 		assertz(sessionid_fact(SessionId,next(H1,H2, Hs),Hs)),             %  6
 		writeln(user_error,superok),
 		my_json_answer("neighbour fact accepted",DictOut).
+
+intent_dictOut("locationmember",DictIn,DictOut):-
+		writeln(user_error,slardar),
+		get_dict(session,DictIn,	SessionObject),
+		get_dict(sessionId,SessionObject,SessionId),
+		get_dict(request,DictIn,RequestObject),
+		get_dict(intent,RequestObject,IntentObject),
+		get_dict(slots,IntentObject,SlotsObject),
+		get_dict(member,SlotsObject,Valuem),
+		get_dict(position,SlotsObject,Valuep),
+		get_dict(value,Valuem,Member),
+		get_dict(value,Valuep,Position),
+		string_lower(Member,MemberLow),
+		string_lower(Position,PosLow),
+		atom_string(Atomember,MemberLow),
+		atom_string(Atopos,PosLow),
+		position_member(Atomember,Atopos,Z),
+		portray_clause(user_error,Z),
+		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
+		writeln(user_error,megaOk),
+		my_json_answer("neighbour fact accepted",DictOut).
+
+
 
 
 
@@ -265,12 +281,11 @@ my_copy_element(X,Ys):-
 			% each house in the list Hs of houses is represented as:
 			%      h(Nationality, Pet, Cigarette, Drink, Color)
 			length(Hs, 5),                                            %  1
-			next(h(_,_,_,_,green), h(_,_,_,_,white), Hs),             %  6
+			             %  6
 			Hs = [_,_,h(_,_,_,milk,_),_,_],                           %  9
 			Hs = [h(norwegian,_,_,_,_)|_],                            % 10
-			next(h(_,fox,_,_,_), h(_,_,chesterfield,_,_), Hs),        % 11
-			next(h(_,_,kool,_,_), h(_,horse,_,_,_), Hs),              % 12
-			next(h(norwegian,_,_,_,_), h(_,_,_,_,blue), Hs),          % 15
+			        % 11
+			       % 15
 */
 next(A, B, Ls) :- append(_, [A,B|_], Ls).
 next(A, B, Ls) :- append(_, [B,A|_], Ls).
@@ -287,7 +302,7 @@ direct_member(M,P,R):-
 			replace([],Co,_,Coe),
     	replace([],Pe,_,Pee),
     	replace([],Dr,_,Dre),
-    	R = h(Nae,Pee,Cie,Dre,Coe).
+    	R = h(Nae,Pee,Cie,Dre,Coe),!.
 
 next_member(M,P,(Firsthouse|Secondhouse)):-
 			nationalities(M,M,Na),
@@ -313,7 +328,27 @@ next_member(M,P,(Firsthouse|Secondhouse)):-
 			replace([],Dr2,_,Dre2),
 			Secondhouse = h(Nae2,Pee2,Cie2,Dre2,Coe2),!.
 
+position_member(M,P,Z):-
+			nationalities(M,M,Na),
+			ciggies(M,M,Ci),
+			colours(M,M,Co),
+			pets(M,M,Pe),
+			drinks(M,M,Dr),
+			replace([],Na,_,Nae),
+			replace([],Ci,_,Cie),
+			replace([],Co,_,Coe),
+			replace([],Pe,_,Pee),
+			replace([],Dr,_,Dre),
+			Firsthouse = h(Nae,Pee,Cie,Dre,Coe),
+			locationator(Firsthouse,P,Z)
 
+
+locationator(F,middle,Z):-
+			Z = [_,_,F,_,_].
+locationator(F,first,Z):-
+			Z = [_|F].
+locationator(F,last,Z):-                       %  9
+			Z = [F|_].                            % 10
 
 nationalities(M,P,R):-
     	(
@@ -334,7 +369,7 @@ ciggies(M,P,R):-
 
 colours(M,P,R):-
     	(
-        Co = [red,green,white,blue,yellow],
+        Co = [red,green,ivory,blue,yellow],
 		intersection([M,P],Co,Z),
         Z = [R|_];
         R = []
