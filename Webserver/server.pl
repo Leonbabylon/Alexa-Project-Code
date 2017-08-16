@@ -120,7 +120,7 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		atom_string(Atoprop,Property),
 		writeln(user_error,Atoprop),
 		writeln(user_error,Atomember),
-		directmember(Atomember,Atoprop,R),
+		direct_member(Atomember,Atoprop,R),
 		portray_clause(user_error,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
 		writeln(user_error,veryok),
