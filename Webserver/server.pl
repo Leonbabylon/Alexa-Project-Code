@@ -111,7 +111,7 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		dowmcase_atom(Valuep,PropLow),
 		directmember(MemberLow,PropLow,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
-		my_json_answer("fact accepted",DictOut).
+		my_json_answer("direct fact accepted",DictOut).
 
 
 /*
