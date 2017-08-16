@@ -340,7 +340,7 @@ position_member(M,P,Z):-
 			replace([],Pe,_,Pee),
 			replace([],Dr,_,Dre),
 			Firsthouse = h(Nae,Pee,Cie,Dre,Coe),
-			locationator(Firsthouse,P,Z)
+			locationator(Firsthouse,P,Z).
 
 
 locationator(F,middle,Z):-
