@@ -178,6 +178,7 @@ intent_dictOut("query",DictIn,DictOut):-
 		atom_string(AtomQ,QLow),
 		houses(SessionId,Query,Z),            %  6
 		writeln(user_error,ultraOK),
+		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
 
 
@@ -298,8 +299,9 @@ houses(SessionId,Query,Result) :-
 			findall(Rule,sessionid_fact(SessionId,Rule,Hs),X),
 			writeln(user_error,we_really_out_here),
 			maplist(Hs,X,Hsolved),
-			portray_clause(user_error,hoho),
-			Result = [].
+			Hsolved = [Ppp|_],
+			Result = Ppp
+
 
 
 
