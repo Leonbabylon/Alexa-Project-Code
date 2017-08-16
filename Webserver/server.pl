@@ -113,7 +113,7 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		string_lower(Member,MemberLow),
 		string_lower(Property,PropLow),
 		atom_string(Atomember,MemberLow),
-		atom_string(Atoprop,Property),
+		atom_string(Atoprop,PropLow),
 		direct_member(Atomember,Atoprop,R),
 		portray_clause(user_error,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
@@ -121,15 +121,29 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		my_json_answer("direct fact accepted",DictOut).
 
 
-/*
 intent_dictOut("nextmember",DictIn,DictOut):-
 		writeln(user_error,slark),
-		get_dict(session,DictIn,SessionObject),
+		get_dict(session,DictIn,	SessionObject),
 		get_dict(sessionId,SessionObject,SessionId),
 		get_dict(request,DictIn,RequestObject),
 		get_dict(intent,RequestObject,IntentObject),
 		get_dict(slots,IntentObject,SlotsObject),
-*/
+		get_dict(member,SlotsObject,Valuem),
+		get_dict(property,SlotsObject,Valuep),
+		get_dict(location,SlotsObject,Valuel),
+		get_dict(value,Valuem,Member),
+		get_dict(value,Valuep,Property),
+		get_dict(value,Valuel,Location),
+		string_lower(Member,MemberLow),
+		string_lower(Property,PropLow),
+		atom_string(Atomember,MemberLow),
+		atom_string(Atoprop,Property),
+		next_member(Atomember,Atoprop,H1,H2),
+		portray_clause(user_error,H1),
+		portray_clause(user_error,H2),
+		%assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
+		writeln(user_error,superok),
+		my_json_answer("neighbour fact accepted",DictOut).
 
 
 
@@ -247,25 +261,15 @@ my_copy_element(X,Ys):-
 			% each house in the list Hs of houses is represented as:
 			%      h(Nationality, Pet, Cigarette, Drink, Color)
 			length(Hs, 5),                                            %  1
-			member(h(english,_,_,_,red), Hs),                         %  2
-			member(h(spanish,dog,_,_,_), Hs),                         %  3
-			member(h(_,_,_,coffee,green), Hs),                        %  4
-			member(h(ukrainian,_,_,tea,_), Hs),                       %  5
 			next(h(_,_,_,_,green), h(_,_,_,_,white), Hs),             %  6
-			member(h(_,snake,winston,_,_), Hs),                       %  7
-			member(h(_,_,kool,_,yellow), Hs),                         %  8
 			Hs = [_,_,h(_,_,_,milk,_),_,_],                           %  9
 			Hs = [h(norwegian,_,_,_,_)|_],                            % 10
 			next(h(_,fox,_,_,_), h(_,_,chesterfield,_,_), Hs),        % 11
 			next(h(_,_,kool,_,_), h(_,horse,_,_,_), Hs),              % 12
-			member(h(_,_,lucky,juice,_), Hs),                         % 13
-			member(h(japonese,_,kent,_,_), Hs),                       % 14
 			next(h(norwegian,_,_,_,_), h(_,_,_,_,blue), Hs),          % 15
-			member(h(_,_,_,water,_), Hs),		% one of them drinks water
-			member(h(_,zebra,_,_,_), Hs).		% one of them owns a zebra
 
-		next(A, B, Ls) :- append(_, [A,B|_], Ls).
-		next(A, B, Ls) :- append(_, [B,A|_], Ls).
+next(A, B, Ls) :- append(_, [A,B|_], Ls).
+next(A, B, Ls) :- append(_, [B,A|_], Ls).
 
 
 direct_member(M,P,Z):-
@@ -281,6 +285,31 @@ direct_member(M,P,Z):-
     	replace([],Dr,_,Dre),
     	R = [Nae,Pee,Cie,Dre,Coe],
 			Z = h(R).
+
+next_member(M,P,Firsthouse,Secondhouse):-
+			nationalities(M,M,Na),
+			ciggies(M,M,Ci),
+			colours(M,M,Co),
+			pets(M,M,Pe),
+			drinks(M,M,Dr),
+			replace([],Na,_,Nae),
+			replace([],Ci,_,Cie),
+			replace([],Co,_,Coe),
+			replace([],Pe,_,Pee),
+			replace([],Dr,_,Dre),
+			Firsthouse = h(Nae,Pee,Cie,Dre,Coe),
+			nationalities(M,P,Na),
+			ciggies(P,P,Ci),
+			colours(P,P,Co),
+			pets(P,P,Pe),
+			drinks(P,P,Dr),
+			replace([],Na,_,Nae),
+			replace([],Ci,_,Cie),
+			replace([],Co,_,Coe),
+			replace([],Pe,_,Pee),
+			replace([],Dr,_,Dre),
+			Secondhouse = h(Nae,Pee,Cie,Dre,Coe),
+
 
 
 nationalities(M,P,R):-
