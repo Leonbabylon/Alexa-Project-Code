@@ -300,7 +300,7 @@ houses(SessionId,Query,Result) :-
 			writeln(user_error,we_really_out_here),
 			maplist(Hs,X,Hsolved),
 			Hsolved = [Ppp|_],
-			Result = Ppp
+			Result = Ppp.
 
 
 
