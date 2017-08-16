@@ -283,37 +283,46 @@ direct_member(M,P,Z):-
 			Z = h(R).
 
 
-
 nationalities(M,P,R):-
-			(
-			Na = [ukrainian,englishman,spaniard,norwegian,japanese],
-			intersection([M,P],Na,R)
-			).
+    	(
+        Na = [ukrainian,englishman,spaniard,norwegian,japanese],
+		intersection([M,P],Na,Z),
+        Z = [R|_];
+        R = []
+        ).
 
 ciggies(M,P,R):-
-			(
-			Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold],
-			intersection([M,P],Ci,R)
-			).
+    	(
+        Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold],
+		intersection([M,P],Ci,Z),
+        Z = [R|_];
+        R = []
+        ).
+
 
 colours(M,P,R):-
-			(
-			Co = [red,green,white,blue,yellow],
-			intersection([M,P],Co,R)
-			).
+    	(
+        Co = [red,green,white,blue,yellow],
+		intersection([M,P],Co,Z),
+        Z = [R|_];
+        R = []
+        ).
 
 pets(M,P,R):-
-			(
-			Pe = [fox,dog,horse,snails,zebra],
-			intersection([M,P],Pe,R)
-			).
+    	(
+        Pe = [fox,dog,horse,snails,zebra],
+		intersection([M,P],Pe,Z),
+        Z = [R|_];
+        R = []
+        ).
 
 drinks(M,P,R):-
-			(
-			Dr = [coffee,tea,milk,orange_juice,water],
-			intersection([M,P],Dr,R)
-			).
+    	(
+        Dr = [coffee,tea,milk,orange_juice,water],
+		intersection([M,P],Dr,Z),
+        Z = [R|_];
+        R = []
+        ).
 
 replace(Element, Element, NElement, NElement).
-replace(_, X|[], _, X).
 replace(_, X, _, X).
