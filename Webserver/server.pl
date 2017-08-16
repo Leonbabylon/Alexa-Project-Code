@@ -176,9 +176,9 @@ intent_dictOut("query",DictIn,DictOut):-
 		get_dict(value,SlotQ,ValueQ),
 		string_lower(ValueQ,QLow),
 		atom_string(AtomQ,QLow),
-		houses(SessionId,Query,Hs),            %  6
+		houses(SessionId,Query,Z),            %  6
 		writeln(user_error,ultraOK),
-		my_json_answer(Hs,DictOut).
+		my_json_answer(Z,DictOut).
 
 
 
@@ -303,8 +303,6 @@ houses(SessionId,Query,Result) :-
 
 
 
-			%run all asserted facts
-*/
 next(A, B, Ls) :- append(_, [A,B|_], Ls).
 next(A, B, Ls) :- append(_, [B,A|_], Ls).
 
