@@ -269,11 +269,11 @@ my_copy_element(X,Ys):-
 
 
 direct_member(M,P,Z):-
-			nationalities(M,P,Na|_),
-			ciggies(M,P,Ci|_),
-			colours(M,P,Co|_),
-			pets(M,P,Pe|_),
-			drinks(M,P,Dr|_),
+			nationalities(M,P,Na),
+			ciggies(M,P,Ci),
+			colours(M,P,Co),
+			pets(M,P,Pe),
+			drinks(M,P,Dr),
     	replace([],Na,_,Nae),
     	replace([],Ci,_,Cie),
 			replace([],Co,_,Coe),
@@ -315,4 +315,5 @@ drinks(M,P,R):-
 			).
 
 replace(Element, Element, NElement, NElement).
+replace(_, X|[], _, X).
 replace(_, X, _, X).
