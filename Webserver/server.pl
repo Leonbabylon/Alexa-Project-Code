@@ -109,6 +109,8 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(property,SlotsObject,Valuep),
 		downcase_atom(Valuem,MemberLow),
 		dowmcase_atom(Valuep,PropLow),
+		writeln(user_error,MemberLow),
+		writeln(user_error,PropLow),
 		directmember(MemberLow,PropLow,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
 		my_json_answer("direct fact accepted",DictOut).
@@ -260,7 +262,6 @@ my_copy_element(X,Ys):-
 		next(A, B, Ls) :- append(_, [A,B|_], Ls).
 		next(A, B, Ls) :- append(_, [B,A|_], Ls).
 
-assertz(sessionid_fact(SessionId,h(R), Hs),Hs)).
 
 direct_member(M,P,Z):-
 			nationalities(M,P,Na),
