@@ -276,7 +276,7 @@ next(A, B, Ls) :- append(_, [A,B|_], Ls).
 next(A, B, Ls) :- append(_, [B,A|_], Ls).
 
 
-direct_member(M,P,Z):-
+direct_member(M,P,R):-
 			nationalities(M,P,Na),
 			ciggies(M,P,Ci),
 			colours(M,P,Co),
@@ -287,8 +287,7 @@ direct_member(M,P,Z):-
 			replace([],Co,_,Coe),
     	replace([],Pe,_,Pee),
     	replace([],Dr,_,Dre),
-    	R = [Nae,Pee,Cie,Dre,Coe],
-			Z = h(R).
+    	R = h(Nae,Pee,Cie,Dre,Coe).
 
 next_member(M,P,(Firsthouse|Secondhouse)):-
 			nationalities(M,M,Na),
