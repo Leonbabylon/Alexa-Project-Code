@@ -285,7 +285,7 @@ direct_member(M,P,Z):-
     	R = [Nae,Pee,Cie,Dre,Coe],
 			Z = h(R).
 
-next_member(M,P,Firsthouse,Secondhouse):-
+next_member(M,P,(Firsthouse|Secondhouse)):-
 			nationalities(M,M,Na),
 			ciggies(M,M,Ci),
 			colours(M,M,Co),
@@ -297,17 +297,17 @@ next_member(M,P,Firsthouse,Secondhouse):-
 			replace([],Pe,_,Pee),
 			replace([],Dr,_,Dre),
 			Firsthouse = h(Nae,Pee,Cie,Dre,Coe),
-			nationalities(M,P,Na),
-			ciggies(P,P,Ci),
-			colours(P,P,Co),
-			pets(P,P,Pe),
-			drinks(P,P,Dr),
-			replace([],Na,_,Nae),
-			replace([],Ci,_,Cie),
-			replace([],Co,_,Coe),
-			replace([],Pe,_,Pee),
-			replace([],Dr,_,Dre),
-			Secondhouse = h(Nae,Pee,Cie,Dre,Coe).
+			nationalities(P,P,Na2),
+			ciggies(P,P,Ci2),
+			colours(P,P,Co2),
+			pets(P,P,Pe2),
+			drinks(P,P,Dr2),
+			replace([],Na2,_,Nae2),
+			replace([],Ci2,_,Cie2),
+			replace([],Co2,_,Coe2),
+			replace([],Pe2,_,Pee2),
+			replace([],Dr2,_,Dre2),
+			Secondhouse = h(Nae2,Pee2,Cie2,Dre2,Coe2).
 
 
 
