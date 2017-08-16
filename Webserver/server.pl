@@ -314,7 +314,7 @@ next_member(M,P,(Firsthouse|Secondhouse)):-
 			replace([],Co2,_,Coe2),
 			replace([],Pe2,_,Pee2),
 			replace([],Dr2,_,Dre2),
-			Secondhouse = h(Nae2,Pee2,Cie2,Dre2,Coe2).
+			Secondhouse = h(Nae2,Pee2,Cie2,Dre2,Coe2),!.
 
 
 
