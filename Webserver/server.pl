@@ -137,7 +137,7 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		string_lower(Member,MemberLow),
 		string_lower(Property,PropLow),
 		atom_string(Atomember,MemberLow),
-		atom_string(Atoprop,Property),
+		atom_string(Atoprop,PropLow),
 		next_member(Atomember,Atoprop,H1,H2),
 		portray_clause(user_error,H1),
 		portray_clause(user_error,H2),
@@ -256,8 +256,7 @@ my_copy_element(X,Ys):-
 			houses(Hs),
 			member(h(Drinker,_,_,water,_), Hs).
 
-
-		houses(Hs) :-
+/*houses(Hs) :-
 			% each house in the list Hs of houses is represented as:
 			%      h(Nationality, Pet, Cigarette, Drink, Color)
 			length(Hs, 5),                                            %  1
@@ -267,7 +266,7 @@ my_copy_element(X,Ys):-
 			next(h(_,fox,_,_,_), h(_,_,chesterfield,_,_), Hs),        % 11
 			next(h(_,_,kool,_,_), h(_,horse,_,_,_), Hs),              % 12
 			next(h(norwegian,_,_,_,_), h(_,_,_,_,blue), Hs),          % 15
-
+*/
 next(A, B, Ls) :- append(_, [A,B|_], Ls).
 next(A, B, Ls) :- append(_, [B,A|_], Ls).
 
