@@ -109,8 +109,8 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(property,SlotsObject,Valuep),
 		downcase_atom(Valuem,MemberLow),
 		dowmcase_atom(Valuep,PropLow),
-		writeln(user_error,MemberLow),
-		writeln(user_error,PropLow),
+		writeln(user_error,hmmm),
+		writeln(user_error,oK),
 		directmember(MemberLow,PropLow,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
 		my_json_answer("direct fact accepted",DictOut).
@@ -223,7 +223,7 @@ get_input(Input):-
 
 show_answer(Answer):-
     write('! '), flush, write(Answer),nl.
-		
+
 my_copy_element(X,Ys):-
     member(X1,Ys),
     copy_term(X1,X).
