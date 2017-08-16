@@ -143,8 +143,7 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		portray_clause(user_error,hmmm),
 		atom_string(Atoprop,PropLow),
 		portray_clause(user_error,hmmm),
-		next_member(Atomember,Atoprop,Z),
-		portray_clause(user_error,(H1|H2)),
+		next_member(Atomember,Atoprop,(H1|H2)),
 		portray_clause(user_error,H1),
 		portray_clause(user_error,H2),
 		assertz(sessionid_fact(SessionId,next(H1,H2, Hs),Hs)),             %  6
