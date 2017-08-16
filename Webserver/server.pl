@@ -177,6 +177,8 @@ intent_dictOut("query",DictIn,DictOut):-
 		string_lower(ValueQ,QLow),
 		atom_string(AtomQ,QLow),
 		houses(SessionId,Query,Hs),            %  6
+		writeln(user_error,ultraOK),
+		my_json_answer(Hs,DictOut).
 
 
 
