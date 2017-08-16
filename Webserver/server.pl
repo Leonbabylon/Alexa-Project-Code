@@ -4,6 +4,7 @@
 :- use_module(library(http/http_json)).
 :- use_module(library(random)).
 :- use_module(library(listing)).
+:- use_module(library(lists)).
 
 :- dynamic sessionid_fact/2. %hmmm
 :- dynamic sessionid_fact/3.
@@ -111,11 +112,11 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(value,Valuep,Property),
 		portray_clause(user_error,Member),
 		portray_clause(user_error,Property),
-		%downcase_atom(Member,MemberLow),
-		%dowmcase_atom(Property,PropLow),
+		string_lower(Member,MemberLow),
+		string_lower(Property,PropLow),
 		writeln(user_error,hmmm),
 		writeln(user_error,oK),
-		directmember(Member,Property,R),
+		directmember(MemberLow,PropLow,R),
 		portray_clause(user_error,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
 		writeln(user_error,veryok),
