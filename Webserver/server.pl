@@ -162,7 +162,7 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
 		writeln(user_error,megaOk),
-		my_json_answer("neighbour fact accepted",DictOut).
+		my_json_answer("location fact accepted",DictOut).
 
 
 
@@ -345,9 +345,9 @@ position_member(M,P,Z):-
 
 locationator(F,middle,Z):-
 			Z = [_,_,F,_,_].
-locationator(F,first,Z):-
+locationator(F,last,Z):-
 			Z = [_|F].
-locationator(F,last,Z):-                       %  9
+locationator(F,first,Z):-                       %  9
 			Z = [F|_].                            % 10
 
 nationalities(M,P,R):-
