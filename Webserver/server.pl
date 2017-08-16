@@ -116,7 +116,9 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		writeln(user_error,hmmm),
 		writeln(user_error,oK),
 		directmember(Member,Property,R),
+		portray_clause(user_error,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
+		writeln(user_error,very ok),
 		my_json_answer("direct fact accepted",DictOut).
 
 
