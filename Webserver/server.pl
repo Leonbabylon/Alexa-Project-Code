@@ -6,6 +6,7 @@
 :- use_module(library(listing)).
 
 :- dynamic sessionid_fact/2. %hmmm
+:- dynamic sessionid_fact/3.
 :- dynamic '$copy'/1.				 %hmmm
 :- op(600, xfy, '=>').			 %hmmm
 
@@ -99,7 +100,7 @@ intent_dictOut("question",DictIn,DictOut):-
 	).
 intent_dictOut("directmember",DictIn,DictOut):-
 		writeln(user_error,fishboy),
-		get_dict(session,DictIn,SessionObject),
+		get_dict(session,DictIn,	SessionObject),
 		get_dict(sessionId,SessionObject,SessionId),
 		get_dict(request,DictIn,RequestObject),
 		get_dict(intent,RequestObject,IntentObject),
@@ -108,15 +109,9 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(property,SlotsObject,Valuep),
 		downcase_atom(Valuem,MemberLow),
 		dowmcase_atom(Valuep,PropLow),
-		atom_string(Atomember,MemberLow),
-		atom_string(Atoprop,PropLow),
-		portray_clause(user_error,Valuem),
-		portray_clause(user_error,Valuep),
-		%(phrase(sentence(Rule),AtomList) ->
-		 %(assertz(sessionid_fact(SessionId,Rule)),
-		  %my_json_answer(Valuem,DictOut));
-		  %my_json_answer(Valuem,DictOut)).
-		my_json_answer(Valuep,DictOut).
+		directmember(MemberLow,PropLow,R),
+		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
+		my_json_answer("fact accepted",DictOut).
 
 
 /*
@@ -264,20 +259,54 @@ my_copy_element(X,Ys):-
 
 		next(A, B, Ls) :- append(_, [A,B|_], Ls).
 		next(A, B, Ls) :- append(_, [B,A|_], Ls).
-/*
-		nationalities(
-		[ukrainian,englishman,spaniard,norwegian,japanese]
-		).
-		ciggies(
-		[kools,lucky strike,parliaments,chesterfields,old gold]
-		).
-		colours(
-		[red,green,white,blue,yellow]
-		).
-		pets(
-		[fox,dog,horse,snails,zebra]
-		).
-		drinks(
-		[coffee,tea,milk,orange juice,water]
-		).
-*/
+
+assertz(sessionid_fact(SessionId,h(R), Hs),Hs)).
+
+direct_member(M,P,Z):-
+			nationalities(M,P,Na),
+			ciggies(M,P,Ci),
+			colours(M,P,Co),
+			pets(M,P,Pe),
+			drinks(M,P,Dr),
+    	replace([],Na,_,Nae),
+    	replace([],Ci,_,Cie),
+			replace([],Co,_,Coe),
+    	replace([],Pe,_,Pee),
+    	replace([],Dr,_,Dre),
+    	R = [Nae,Pee,Cie,Dre,Coe],
+			Z = h(R).
+
+
+
+nationalities(M,P,R):-
+			(
+			Na = [ukrainian,englishman,spaniard,norwegian,japanese],
+			intersection([M,P],Na,R)
+			).
+
+ciggies(M,P,R):-
+			(
+			Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold],
+			intersection([M,P],Ci,R)
+			).
+
+colours(M,P,R):-
+			(
+			Co = [red,green,white,blue,yellow],
+			intersection([M,P],Co,R)
+			).
+
+pets(M,P,R):-
+			(
+			Pe = [fox,dog,horse,snails,zebra],
+			intersection([M,P],Pe,R)
+			).
+
+drinks(M,P,R):-
+			(
+			Dr = [coffee,tea,milk,orange_juice,water],
+			intersection([M,P],Dr,R)
+			).
+
+replace(Element, Element, NElement, NElement).
+replace(_, X, _, X).
