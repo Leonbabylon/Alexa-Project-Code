@@ -296,9 +296,9 @@ my_copy_element(X,Ys):-
 
 houses(SessionId,Query,Result) :-
 			length(Hs, 5),
-			findall(Rule,sessionid_fact(SessionId,Rule,Hs),X),
+			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),X),
 			writeln(user_error,we_really_out_here),
-			maplist(Hs,X,Hsolved),
+			maplist((_,Hs),X,Hsolved),
 			Hsolved = [Ppp|_],
 			Result = Ppp.
 
@@ -370,7 +370,7 @@ locationator(F,first,Z):-                       %  9
 
 nationalities(M,P,R):-
     	(
-        Na = [ukrainian,englishman,spaniard,norwegian,japanese],
+        Na = [ukrainian,englishman,spaniard,norwegian,japanese,fraeport,dabokva,dunwall,karnaca,baleton],
 		intersection([M,P],Na,Z),
         Z = [R|_];
         R = []
@@ -378,7 +378,7 @@ nationalities(M,P,R):-
 
 ciggies(M,P,R):-
     	(
-        Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold],
+        Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold,lady_winslow,countess_contee,madam_natsiou,baroness_finch,doctor_marcolla],
 		intersection([M,P],Ci,Z),
         Z = [R|_];
         R = []
@@ -387,7 +387,7 @@ ciggies(M,P,R):-
 
 colours(M,P,R):-
     	(
-        Co = [red,green,ivory,blue,yellow],
+        Co = [red,green,ivory,blue,yellow,purple,white],
 		intersection([M,P],Co,Z),
         Z = [R|_];
         R = []
@@ -395,7 +395,7 @@ colours(M,P,R):-
 
 pets(M,P,R):-
     	(
-        Pe = [fox,dog,horse,snails,zebra],
+        Pe = [fox,dog,horse,snails,zebra,war_medal,snuff_tin,ring,bird_pendant,diamond],
 		intersection([M,P],Pe,Z),
         Z = [R|_];
         R = []
@@ -403,7 +403,7 @@ pets(M,P,R):-
 
 drinks(M,P,R):-
     	(
-        Dr = [coffee,tea,milk,orange_juice,water],
+        Dr = [coffee,tea,milk,orange_juice,water,whiskey,rum,wine,beer,absinthe],
 		intersection([M,P],Dr,Z),
         Z = [R|_];
         R = []
