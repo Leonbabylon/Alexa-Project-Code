@@ -111,9 +111,13 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(value,Valuem,Member),
 		get_dict(value,Valuep,Property),
 		string_lower(Member,MemberLow),
+		atomic_list_concat(Words, ' ', MemberLow),
+		atomic_list_concat(Words, '_', Atomember,
 		string_lower(Property,PropLow),
-		atom_string(Atomember,MemberLow),
-		atom_string(Atoprop,PropLow),
+		atomic_list_concat(Words, ' ', PropLow),
+		atomic_list_concat(Words, '_', Atoprop),
+		%atom_string(Atomember,MemberLow),
+		%atom_string(Atoprop,PropLow),
 		direct_member(Atomember,Atoprop,R),
 		portray_clause(user_error,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
@@ -135,9 +139,13 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		get_dict(value,Valuep,Property),
 		get_dict(value,Valuel,_),
 		string_lower(Member,MemberLow),
+		atomic_list_concat(Words, ' ', MemberLow),
+		atomic_list_concat(Words, '_', Atomember),
 		string_lower(Property,PropLow),
-		atom_string(Atomember,MemberLow),
-		atom_string(Atoprop,PropLow),
+		atomic_list_concat(Words, ' ', PropLow),
+		atomic_list_concat(Words, '_', Atoprop),
+		%atom_string(Atomember,MemberLow),
+		%atom_string(Atoprop,PropLow),
 		next_member(Atomember,Atoprop,(H1|H2)),
 		assertz(sessionid_fact(SessionId,next(H1,H2, Hs),Hs)),             %  6
 		writeln(user_error,superok),
@@ -155,9 +163,13 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		get_dict(value,Valuem,Member),
 		get_dict(value,Valuep,Position),
 		string_lower(Member,MemberLow),
+		atomic_list_concat(Words, ' ', MemberLow),
+		atomic_list_concat(Words, '_', Atomember),
 		string_lower(Position,PosLow),
-		atom_string(Atomember,MemberLow),
-		atom_string(Atopos,PosLow),
+		atomic_list_concat(Words, ' ', PosLow),
+		atomic_list_concat(Words, '_', Atopos),
+		%atom_string(Atomember,MemberLow),
+		%atom_string(Atopos,PosLow),
 		position_member(Atomember,Atopos,Z),
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
@@ -175,12 +187,16 @@ intent_dictOut("query",DictIn,DictOut):-
 		get_dict(questionSlot,SlotsObject,SlotQ),
 		get_dict(value,SlotQ,ValueQ),
 		string_lower(ValueQ,QLow),
-		atom_string(AtomQ,QLow),
+		atomic_list_concat(Words, ' ', QLow),
+		atomic_list_concat(Words, '_', AtomQ),
+		%atom_string(AtomQ,QLow),
 		houses(SessionId,AtomQ,Z),            %  6
 		writeln(user_error,ultraOK),
 		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
 
+atomic_list_concat(Words, ' ', Input),
+atomic_list_concat(Words, '_', Output),
 
 
 
@@ -277,18 +293,10 @@ my_copy_element(X,Ys):-
     copy_term(X1,X).
 
 
-		zebra_owner(Owner) :-
-			houses(Hs),
-			member(h(Owner,zebra,_,_,_), Hs).
-
-		water_drinker(Drinker) :-
-			houses(Hs),
-			member(h(Drinker,_,_,water,_), Hs).
-
 houses(SessionId,Query,Result) :-
 			length(Hs, 5),
 			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
-			writeln(user_error,we_really_out_here),
+			%writeln(user_error,we_really_out_here),
 			processrb(Rulebase,Hs),
 			direct_member_query(Query,Result,R),
 			member(R, Hs).
@@ -296,7 +304,7 @@ houses(SessionId,Query,Result) :-
 
 processrb([]).
 processrb([X],Hs) :-
-			writeln(user_error,"wtf"),
+			%writeln(user_error,"wtf"),
 			X = (Rule,Hs),
 			Rule.
 processrb([X|T],Hs) :-
@@ -383,25 +391,23 @@ locationator(F,first,Z):-                       %  9
 
 nationalities(M,P,R):-
     	(
-        Na = [ukrainian,englishman,spaniard,norwegian,japanese,fraeport,dabokva,dunwall,karnaca,baleton],
-		intersection([M,P],Na,Z),
+        Na = [ukrainian,englishman,spaniard,norwegian,japanese,lady_winslow,countess_contee,madam_natsiou,baroness_finch,doctor_marcolla]
+				intersection([M,P],Na,Z),
         Z = [R|_];
         R = []
         ).
 
 ciggies(M,P,R):-
     	(
-        Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold,lady_winslow,countess_contee,madam_natsiou,baroness_finch,doctor_marcolla],
-		intersection([M,P],Ci,Z),
+        Ci = [kools,lucky_strike,parliaments,chesterfields,old_gold,fraeport,dabokva,dunwall,karnaca,baleton],
+				intersection([M,P],Ci,Z),
         Z = [R|_];
         R = []
         ).
-
-
 colours(M,P,R):-
     	(
         Co = [red,green,ivory,blue,yellow,purple,white],
-		intersection([M,P],Co,Z),
+				intersection([M,P],Co,Z),
         Z = [R|_];
         R = []
         ).
@@ -409,7 +415,7 @@ colours(M,P,R):-
 pets(M,P,R):-
     	(
         Pe = [fox,dog,horse,snails,zebra,war_medal,snuff_tin,ring,bird_pendant,diamond],
-		intersection([M,P],Pe,Z),
+				intersection([M,P],Pe,Z),
         Z = [R|_];
         R = []
         ).
@@ -417,7 +423,7 @@ pets(M,P,R):-
 drinks(M,P,R):-
     	(
         Dr = [coffee,tea,milk,orange_juice,water,whiskey,rum,wine,beer,absinthe],
-		intersection([M,P],Dr,Z),
+				intersection([M,P],Dr,Z),
         Z = [R|_];
         R = []
         ).
