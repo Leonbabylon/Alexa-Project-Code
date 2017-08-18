@@ -174,10 +174,10 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		atomic_list_concat(Words1, '_', Atopos),
 		%atom_string(Atomember,MemberLow),
 		%atom_string(Atopos,PosLow),
-		portray_clause(user_error,Atopos),
+		%portray_clause(user_error,Atopos),
 		%replace('1st',Atopos,first,Atopax),
-		portray_clause(user_error,Atopos),
-		position_member(Atomember,Atopax,Z),
+		%portray_clause(user_error,Atopos),
+		position_member(Atomember,Atopos,Z),
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
 		writeln(user_error,megaOk),
