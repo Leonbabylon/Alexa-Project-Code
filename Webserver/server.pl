@@ -289,7 +289,7 @@ houses(SessionId,Query,Result) :-
 			length(Hs, 5),
 			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
 			writeln(user_error,we_really_out_here),
-			processrb(Rulebase,Hs).
+			processrb(Rulebase,Hs),
 			direct_member_query(Query,Result,R),
 			member(R, Hs).
 
