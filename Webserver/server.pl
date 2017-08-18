@@ -175,7 +175,7 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		%atom_string(Atomember,MemberLow),
 		%atom_string(Atopos,PosLow),
 		portray_clause(user_error,Atopos),
-		replace(1,Atopos,fir,Atopax)
+		replace(1,Atopos,fir,Atopax),
 		position_member(Atomember,Atopax,Z),
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
