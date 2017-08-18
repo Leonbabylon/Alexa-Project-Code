@@ -112,7 +112,7 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		get_dict(value,Valuep,Property),
 		string_lower(Member,MemberLow),
 		atomic_list_concat(Words, ' ', MemberLow),
-		atomic_list_concat(Words, '_', Atomember,
+		atomic_list_concat(Words, '_', Atomember),
 		string_lower(Property,PropLow),
 		atomic_list_concat(Words, ' ', PropLow),
 		atomic_list_concat(Words, '_', Atoprop),
@@ -195,8 +195,6 @@ intent_dictOut("query",DictIn,DictOut):-
 		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
 
-atomic_list_concat(Words, ' ', Input),
-atomic_list_concat(Words, '_', Output),
 
 
 
