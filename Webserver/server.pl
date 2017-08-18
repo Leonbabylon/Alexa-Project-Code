@@ -174,6 +174,8 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		atomic_list_concat(Words1, '_', Atopos),
 		%atom_string(Atomember,MemberLow),
 		%atom_string(Atopos,PosLow),
+		portray_clause(user_error,Atopos),
+
 		position_member(Atomember,Atopos,Z),
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
@@ -390,7 +392,7 @@ locationator(F,last,Z):-
 			Z = [_|F].
 locationator(F,first,Z):-                       %  9
 			Z = [F|_].
-locationator(F,1st,Z):-
+locationator(F,st,Z):-
 			Z = [F|_].
 
 nationalities(M,P,R):-
@@ -434,3 +436,4 @@ drinks(M,P,R):-
 
 replace(Element, Element, NElement, NElement).
 replace(_, X, _, X).
+replace(Element|Tail,Element,NElement,NElement|Tail).
