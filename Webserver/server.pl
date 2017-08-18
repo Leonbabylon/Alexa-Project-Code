@@ -389,7 +389,7 @@ locationator(F,first,Z):-                       %  9
 
 nationalities(M,P,R):-
     	(
-        Na = [ukrainian,englishman,spaniard,norwegian,japanese,lady_winslow,countess_contee,madam_natsiou,baroness_finch,doctor_marcolla]
+        Na = [ukrainian,englishman,spaniard,norwegian,japanese,lady_winslow,countess_contee,madam_natsiou,baroness_finch,doctor_marcolla],
 				intersection([M,P],Na,Z),
         Z = [R|_];
         R = []
