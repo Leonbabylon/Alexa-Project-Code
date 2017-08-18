@@ -175,8 +175,8 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		%atom_string(Atomember,MemberLow),
 		%atom_string(Atopos,PosLow),
 		portray_clause(user_error,Atopos),
-		replace('1st',Atopos,first,Atopax),
-		portray_clause(user_error,Atopax),
+		%replace('1st',Atopos,first,Atopax),
+		portray_clause(user_error,Atopos),
 		position_member(Atomember,Atopax,Z),
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
@@ -392,6 +392,8 @@ locationator(F,middle,Z):-
 locationator(F,last,Z):-
 			Z = [_|F].
 locationator(F,first,Z):-                       %  9
+			Z = [F|_].
+locationator(F,'1st',Z):-                       %  9
 			Z = [F|_].
 
 nationalities(M,P,R):-
