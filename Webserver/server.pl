@@ -389,7 +389,9 @@ locationator(F,middle,Z):-
 locationator(F,last,Z):-
 			Z = [_|F].
 locationator(F,first,Z):-                       %  9
-			Z = [F|_].                            % 10
+			Z = [F|_].
+locationator(F,1st,Z):-
+			Z = [F|_].
 
 nationalities(M,P,R):-
     	(
