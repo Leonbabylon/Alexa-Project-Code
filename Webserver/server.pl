@@ -175,7 +175,7 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		%atom_string(Atomember,MemberLow),
 		%atom_string(Atopos,PosLow),
 		portray_clause(user_error,Atopos),
-		replace(1,Atopos,fir,Atopax),
+		replace('1st',Atopos,first,Atopax),
 		portray_clause(user_error,Atopax),
 		position_member(Atomember,Atopax,Z),
 		portray_clause(user_error,Z),
@@ -435,4 +435,4 @@ drinks(M,P,R):-
 
 replace(Element, Element, NElement, NElement).
 replace(_, X, _, X).
-replace(Element|Tail,Element,NElement,NElement|Tail).
+%replace(Element|Tail,Element,NElement,NElement|Tail).
