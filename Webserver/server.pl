@@ -188,15 +188,6 @@ intent_dictOut("query",DictIn,DictOut):-
 intent_dictOut(_,_,DictOut):-
 	my_json_answer('Error parsing',DictOut).
 
-prove_question(Query,SessionId,Answer):-
-	findall(Rule,sessionid_fact(SessionId,Rule),Rulebase),
-	prove_rb(Query,Rulebase),
-	transform(Query,Clauses),
-	phrase(sentence(Clauses),AnswerAtomList),
-	atomics_to_string(AnswerAtomList," ",Answer).
-
-
-
 get_id(Dict,Id):-
 	get_dict(session,Dict,SessionObject),
 	get_dict(application,SessionObject,ApplicationObject),
@@ -296,12 +287,22 @@ my_copy_element(X,Ys):-
 
 houses(SessionId,Query,Result) :-
 			length(Hs, 5),
-			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),X),
+			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
 			writeln(user_error,we_really_out_here),
-			maplist((_,Hs),X,Hsolved),
-			Hsolved = [Ppp|_],
-			Result = Ppp.
+			processrb(Rulebase,Hs).
+			direct_member_query(Query,Result,R),
+			member(R, Hs).
 
+
+processrb([]).
+processrb([X],Hs) :-
+			writeln(user_error,"wtf"),
+			X = (Rule,Hs),
+			Rule.
+processrb([X|T],Hs) :-
+			X = (Rule,Hs),
+			Rule,
+			processrb(T,Hs).
 
 
 
@@ -321,6 +322,18 @@ direct_member(M,P,R):-
     	replace([],Pe,_,Pee),
     	replace([],Dr,_,Dre),
     	R = h(Nae,Pee,Cie,Dre,Coe),!.
+
+direct_member_query(M,Query,R):-
+			ciggies(M,M,Ci),
+			colours(M,M,Co),
+			pets(M,M,Pe),
+			drinks(M,M,Dr),
+    	replace([],Ci,_,Cie),
+			replace([],Co,_,Coe),
+    	replace([],Pe,_,Pee),
+    	replace([],Dr,_,Dre),
+    	R = h(Query,Pee,Cie,Dre,Coe),!.
+
 
 next_member(M,P,(Firsthouse|Secondhouse)):-
 			nationalities(M,M,Na),
