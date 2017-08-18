@@ -113,9 +113,13 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		string_lower(Member,MemberLow),
 		atomic_list_concat(Words, ' ', MemberLow),
 		atomic_list_concat(Words, '_', Atomember),
+		portray_clause(user_error,Atomember),
+
 		string_lower(Property,PropLow),
 		atomic_list_concat(Words, ' ', PropLow),
 		atomic_list_concat(Words, '_', Atoprop),
+		portray_clause(user_error,Atoprop),
+
 		%atom_string(Atomember,MemberLow),
 		%atom_string(Atoprop,PropLow),
 		direct_member(Atomember,Atoprop,R),
