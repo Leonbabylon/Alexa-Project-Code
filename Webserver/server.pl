@@ -20,7 +20,6 @@ handle_request(_Request) :-
 alexa(Request):-
 	http_read_json_dict(Request,DictIn),
 	handle_dict(DictIn,DictOut),
-	%my_json_answer(hello,DictOut),
 	reply_json(DictOut).
 
 
@@ -48,9 +47,6 @@ get_intent(DictIn,IntentName):-
 	get_dict(intent,RequestObject,IntentObject),
 	get_dict(name,IntentObject,IntentName).
 
-
-intent_dictOut("smell",_,DictOut):-
-	my_json_answer("lina sucks at mario kart", DictOut).
 
 intent_dictOut("getANewFact",_,DictOut):-
 	answers(RandomMessage),
@@ -208,7 +204,7 @@ my_json_answer(Message,X):-
 	     }.
 
 answers(X):-
-	random_member(X,["lina married nick crompton in 2028", "lina likes aubergines", "lina eats molluscum", "linas live in herds","linas have two large tusks"]).
+	random_member(X,["bought u some extra time", "i just stopped you timing out", "you have another 8 seconds to say something useful"]).
 
 weirdstuff(X):-
 	X = "haha".
@@ -225,7 +221,6 @@ zebra_solve(SessionId,Query,Result) :-
 
 processrb([]).
 processrb([X],Hs) :-
-			%writeln(user_error,"wtf"),
 			X = (Rule,Hs),
 			Rule.
 processrb([X|T],Hs) :-
@@ -261,7 +256,7 @@ direct_member_query(M,Query,R):-
 			replace([],Co,_,Coe),
     	replace([],Pe,_,Pee),
     	replace([],Dr,_,Dre),
-    	R = h(Query,Pee,Cie,Dre,Coe),.
+    	R = h(Query,Pee,Cie,Dre,Coe).
 
 
 next_member(M,P,(Firsthouse|Secondhouse)):-
@@ -357,4 +352,3 @@ drinks(M,P,R):-
 
 replace(Element, Element, NElement, NElement).
 replace(_, X, _, X).
-%replace(Element|Tail,Element,NElement,NElement|Tail).
