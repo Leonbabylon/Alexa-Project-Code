@@ -28,7 +28,6 @@ handle_dict(DictIn,DictOut) :-
 	setup_call_cleanup(
 			   open('recieved.txt',append,Stream,[]),
 			   (get_id(DictIn,Id),
-%			    print(Id),
 			    format(Stream,"Id: ~w\n",[Id])),
 			   close(Stream)
 			  ),
@@ -44,18 +43,11 @@ handle_dict(_DictIn,DictOut):-
 	     }.
 
 
-
 get_intent(DictIn,IntentName):-
 	get_dict(request,DictIn,RequestObject),
 	get_dict(intent,RequestObject,IntentObject),
 	get_dict(name,IntentObject,IntentName).
 
-/*
- *  Steps needed
-* 1. check the app id
-  2. Check the time stamp
-* 3. Make the json responce
-*/
 
 intent_dictOut("smell",_,DictOut):-
 	my_json_answer("lina sucks at mario kart", DictOut).
@@ -113,15 +105,9 @@ intent_dictOut("directmember",DictIn,DictOut):-
 		string_lower(Member,MemberLow),
 		atomic_list_concat(Words, ' ', MemberLow),
 		atomic_list_concat(Words, '_', Atomember),
-		%portray_clause(user_error,Atomember),
-
 		string_lower(Property,PropLow),
 		atomic_list_concat(Words1, ' ', PropLow),
 		atomic_list_concat(Words1, '_', Atoprop),
-		%portray_clause(user_error,Atoprop),
-
-		%atom_string(Atomember,MemberLow),
-		%atom_string(Atoprop,PropLow),
 		direct_member(Atomember,Atoprop,R),
 		portray_clause(user_error,R),
 		assertz(sessionid_fact(SessionId,member(R, Hs),Hs)),
@@ -148,8 +134,6 @@ intent_dictOut("nextmember",DictIn,DictOut):-
 		string_lower(Property,PropLow),
 		atomic_list_concat(Words1, ' ', PropLow),
 		atomic_list_concat(Words1, '_', Atoprop),
-		%atom_string(Atomember,MemberLow),
-		%atom_string(Atoprop,PropLow),
 		next_member(Atomember,Atoprop,(H1|H2)),
 		portray_clause(user_error,H1),
 		portray_clause(user_error,H2),
@@ -174,11 +158,6 @@ intent_dictOut("locationmember",DictIn,DictOut):-
 		string_lower(Position,PosLow),
 		atomic_list_concat(Words1, ' ', PosLow),
 		atomic_list_concat(Words1, '_', Atopos),
-		%atom_string(Atomember,MemberLow),
-		%atom_string(Atopos,PosLow),
-		%portray_clause(user_error,Atopos),
-		%replace('1st',Atopos,first,Atopax),
-		%portray_clause(user_error,Atopos),
 		position_member(Atomember,Atopos,Z),
 		portray_clause(user_error,Z),
 		assertz(sessionid_fact(SessionId,Hs = Z,Hs)),             %  6
@@ -198,26 +177,25 @@ intent_dictOut("query",DictIn,DictOut):-
 		string_lower(ValueQ,QLow),
 		atomic_list_concat(Words, ' ', QLow),
 		atomic_list_concat(Words, '_', AtomQ),
-		%atom_string(AtomQ,QLow),
-		houses(SessionId,AtomQ,Z),            %  6
+		zebra_solve(SessionId,AtomQ,Z),            %  6
 		writeln(user_error,ultraOK),
 		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
 
 
-
-
-
 intent_dictOut(_,_,DictOut):-
 	my_json_answer('Error parsing',DictOut).
+
 
 get_id(Dict,Id):-
 	get_dict(session,Dict,SessionObject),
 	get_dict(application,SessionObject,ApplicationObject),
 	get_dict(applicationId,ApplicationObject,Id).
 
+
 application_id(X):-
 	X= "amzn1.ask.skill.dcc7c1a0-8ac6-4bd1-8ba1-78a56e8313c4".
+
 
 my_json_answer(Message,X):-
 	X = _{
@@ -237,73 +215,9 @@ weirdstuff(X):-
 
 
 
-sentence(C) --> determiner(N,M1,M2,C),
-                noun(N,M1),
-                verb_phrase(N,M2).
-
-sentence([(L:-true)]) --> proper_noun(N,X),
-                          verb_phrase(N,X=>L).
-
-verb_phrase(s,M) --> [is],property(s,M).
-verb_phrase(p,M) --> [are], property(p,M).
-
-property(s,M) --> [a], noun(s,M).
-property(p,M) --> noun(p,M).
-
-property(_N,X=>mortal(X)) --> [mortal].
-
-determiner(s,X=>B,X=>H,[(H:-B)]) --> [every].
-determiner(p, sk=>H1, sk=>H2, [(H1:-true),(H2 :- true)]) -->[some].
-
-proper_noun(s,leon) --> [leon].
-noun(s,X=>human(X)) --> [human].
-noun(p,X=>human(X)) --> [humans].
-noun(s,X=>living_being(X)) --> [living],[being].
-noun(p,X=>living_being(X)) --> [living],[beings].
-
-
-question(Q) --> [who],[is], property(s,_X=>Q).
-question(Q) --> [is], proper_noun(N,X),
-                property(N,X=>Q).
-question((Q1,Q2)) --> [are],[some],noun(p,sk=>Q1),
-	property(p,sk=>Q2).
-
-prove_rb(true,_Rulebase):-!.
-prove_rb((A,B),Rulebase):-!,
-    prove_rb(A,Rulebase),
-    prove_rb(B,Rulebase).
-
-prove_rb(A,Rulebase):-
-    find_clause((A:-B),Rulebase),
-    prove_rb(B,Rulebase).
-
-find_clause(Clause,[Rule|_Rules]):-
-    my_copy_element(Clause,Rule).
-
-find_clause(Clause,[_Rule|Rules]):-
-    find_clause(Clause,Rules).
-
-transform((A,B),[(A:-true)|Rest]):-!,
-    transform(B,Rest).
-
-transform(A,[(A:-true)]).
-
-
-get_input(Input):-
-    write('? '), flush, read(Input).
-
-show_answer(Answer):-
-    write('! '), flush, write(Answer),nl.
-
-my_copy_element(X,Ys):-
-    member(X1,Ys),
-    copy_term(X1,X).
-
-
-houses(SessionId,Query,Result) :-
+zebra_solve(SessionId,Query,Result) :-
 			length(Hs, 5),
 			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
-			%writeln(user_error,we_really_out_here),
 			processrb(Rulebase,Hs),
 			direct_member_query(Query,Result,R),
 			member(R, Hs).
@@ -347,7 +261,7 @@ direct_member_query(M,Query,R):-
 			replace([],Co,_,Coe),
     	replace([],Pe,_,Pee),
     	replace([],Dr,_,Dre),
-    	R = h(Query,Pee,Cie,Dre,Coe),!.
+    	R = h(Query,Pee,Cie,Dre,Coe),.
 
 
 next_member(M,P,(Firsthouse|Secondhouse)):-
@@ -393,9 +307,13 @@ locationator(F,middle,Z):-
 			Z = [_,_,F,_,_].
 locationator(F,last,Z):-
 			Z = [_|F].
+locationator(F,far_right,Z):-
+			Z = [_|F].
 locationator(F,first,Z):-                       %  9
 			Z = [F|_].
 locationator(F,'1st',Z):-                       %  9
+			Z = [F|_].
+locationator(F,'far_left',Z):-
 			Z = [F|_].
 
 nationalities(M,P,R):-
