@@ -178,7 +178,7 @@ intent_dictOut("query",DictIn,DictOut):-
 		string_lower(ValueT,TLow),
 		atomic_list_concat(Words1, ' ', TLow),
 		atomic_list_concat(Words1, '_', AtomT),
-		zebra_solve(SessionId,Atomt,AtomQ,Z),            %  6
+		zebra_solve(SessionId,AtomT,AtomQ,Z),            %  6
 		writeln(user_error,ultraOK),
 		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
@@ -230,7 +230,7 @@ zebra_solve(SessionId,where,Query,Result) :-
 			direct_member_query(Query,_,R),
 			positionator(R,Hs,Result).
 
-zebra_solve(SessionId,_,Query,Result) :-
+zebra_solve(_,_,_,Result) :-
 			Result = "query failed".
 
 
