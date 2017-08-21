@@ -227,7 +227,7 @@ zebra_solve(SessionId,where,Query,Result) :-
 			length(Hs, 5),
 			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
 			processrb(Rulebase,Hs),
-			direct_member_query(Query,_,R),
+			direct_member(Query,Query,R),
 			positionator(R,Hs,Result).
 
 zebra_solve(_,_,_,Result) :-
@@ -273,6 +273,7 @@ direct_member_query(M,Query,R):-
     	replace([],Pe,_,Pee),
     	replace([],Dr,_,Dre),
     	R = h(Query,Pee,Cie,Dre,Coe).
+
 
 
 next_member(M,P,(Firsthouse|Secondhouse)):-
