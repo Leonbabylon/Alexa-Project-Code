@@ -168,12 +168,17 @@ intent_dictOut("query",DictIn,DictOut):-
 		get_dict(request,DictIn,RequestObject),
 		get_dict(intent,RequestObject,IntentObject),
 		get_dict(slots,IntentObject,SlotsObject),
+		get_dict(queryType,SlotsObject,SlotT),
 		get_dict(questionSlot,SlotsObject,SlotQ),
 		get_dict(value,SlotQ,ValueQ),
+		get_dict(value,SlotT,ValueT),
 		string_lower(ValueQ,QLow),
 		atomic_list_concat(Words, ' ', QLow),
 		atomic_list_concat(Words, '_', AtomQ),
-		zebra_solve(SessionId,AtomQ,Z),            %  6
+		string_lower(ValueT,TLow),
+		atomic_list_concat(Words1, ' ', TLow),
+		atomic_list_concat(Words1, '_', AtomT),
+		zebra_solve(SessionId,Atomt,AtomQ,Z),            %  6
 		writeln(user_error,ultraOK),
 		portray_clause(user_error,Z),
 		my_json_answer(Z,DictOut).
@@ -211,12 +216,23 @@ weirdstuff(X):-
 
 
 
-zebra_solve(SessionId,Query,Result) :-
+zebra_solve(SessionId,who,Query,Result) :-
 			length(Hs, 5),
 			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
 			processrb(Rulebase,Hs),
 			direct_member_query(Query,Result,R),
 			member(R, Hs).
+
+zebra_solve(SessionId,where,Query,Result) :-
+			length(Hs, 5),
+			findall((Rule,Hz),sessionid_fact(SessionId,Rule,Hz),Rulebase),
+			processrb(Rulebase,Hs),
+			direct_member_query(Query,_,R),
+			positionator(R,Hs,Result).
+
+zebra_solve(SessionId,_,Query,Result) :-
+			Result = "query failed".
+
 
 
 processrb([]).
@@ -310,6 +326,22 @@ locationator(F,'1st',Z):-                       %  9
 			Z = [F|_].
 locationator(F,'far_left',Z):-
 			Z = [F|_].
+
+positionator(Q,Hs,Z):-
+			Hs = [Q,_,_,_,_],
+			Z = first.
+positionator(Q,Hs,Z):-
+			Hs = [_,Q,_,_,_],
+			Z = second.
+positionator(Q,Hs,Z):-
+			Hs = [_,_,Q,_,_],
+			Z = third.
+positionator(Q,Hs,Z):-
+			Hs = [_,_,_,Q,_],
+			Z = fourth.
+positionator(Q,Hs,Z):-
+			Hs = [_,_,_,_,Q],
+			Z = fifth.
 
 nationalities(M,P,R):-
     	(
