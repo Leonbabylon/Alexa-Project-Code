@@ -328,19 +328,19 @@ locationator(F,'far_left',Z):-
 			Z = [F|_].
 
 positionator(Q,Hs,Z):-
-			Hs = [Q,_,_,_,_],
+			[Q,_,_,_,_] = Hs,
 			Z = first.
 positionator(Q,Hs,Z):-
-			Hs = [_,Q,_,_,_],
+			[_,Q,_,_,_] = Hs,
 			Z = second.
 positionator(Q,Hs,Z):-
-			Hs = [_,_,Q,_,_],
+			[_,_,Q,_,_] = Hs,
 			Z = third.
 positionator(Q,Hs,Z):-
-			Hs = [_,_,_,Q,_],
+			[_,_,_,Q,_] = Hs,
 			Z = fourth.
 positionator(Q,Hs,Z):-
-			Hs = [_,_,_,_,Q],
+			[_,_,_,_,Q] = Hs,
 			Z = fifth.
 
 nationalities(M,P,R):-
