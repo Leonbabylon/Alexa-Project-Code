@@ -1,0 +1,73 @@
+
+locationSlot{
+    left of
+    right of
+    next to
+    neighbours
+    neighbors
+}
+
+operatorSlot{
+    englishman
+    red
+    spaniard
+    dog
+    coffee
+    green
+    ukrainian
+    tea
+    ivory
+    old gold
+    snails
+    kools
+    yellow
+    milk
+    norwegian
+    chesterfields
+    fox
+    horse
+    lucky strike
+    orange juice
+    japanese
+    parliaments
+    blue
+    zebra
+    water
+    purple
+    white
+    doctor marcolla
+    lady winslow
+    countess contee
+    baroness finch
+    madam natsiou
+    whiskey
+    rum
+    wine
+    beer
+    absinthe
+    fraeport
+    dabokva
+    dunwall
+    karnaca
+    baleton
+    war medal
+    ring
+    snuff tin
+    bird pendant
+    diamond
+    someone
+    unknown person
+    unknown
+}
+positionSlot{
+    middle
+    first
+    last
+    far left
+    center
+    far right
+}
+querydetail{
+    who
+    where
+}

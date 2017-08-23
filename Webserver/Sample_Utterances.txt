@@ -1,0 +1,43 @@
+directmember The {member} lives in the {property} house
+directmember The {member} owns the {property}
+directmember {member} is drunk in the {property}
+directmember the {member} drinks {property}
+directmember the {member} owns {property}
+directmember {member} are smoked in the {property}
+directmember the {member} smoker drinks {property}
+directmember the {member} smokes {property}
+directmember The {member} owns the {property} house
+directmember {member} wore a jaunty {property} hat
+directmember i remember that {member} outfit because the woman spilled her {property} all over it
+directmember the traveller from {member} was dressed entirely in {property}
+directmember so {member} showed off a prized {property}
+directmember at which the lady from {member} scoffed saying it was no match for her {property}
+directmember {member} raised her {property} in toast
+directmember the lady from {member} full of {property} jumped up onto the table
+directmember then {member} captivated them all with a story about her wild youth in {property}
+directmember an {member} drinks the {property}
+directmember {member} drinks the {property}
+directmember an {member} owns the {property}
+directmember {member} owns the {property}
+getANewFact fact
+getANewFact for a fact
+getANewFact to give me a fact
+locationmember {member} is drunk in the {position} house
+locationmember the {member} lives in the {position} house
+locationmember {member} was at the {position}
+locationmember falling onto the guest in the {position} seat spilling the poor womans {member}
+nextmember the {member} is immediately to the {location} the {property}
+nextmember the man who smokes {member} lives in the house {location} the man with the {property}
+nextmember {member} are smoked in the house {location} the house where the {property} is kept
+nextmember the {member} lives {location} the {property}
+nextmember {member} was {location} the guest wearing a {property} jacket
+nextmember the lady in {member} sat {location} someone in {property}
+nextmember when one of the dinner guests bragged about her {member} the woman {location} her said they were finer in {property} where she lived
+nextmember someone else carried a valuable {member} the visitor from {property} {location} her
+nextmember the visitor from {member} almost spilled her {location} {property}
+query {queryType} owns the {questionSlot}
+query {queryType} drinks {questionSlot}
+query {queryType} smokes {questionSlot}
+query {queryType} lives in the {questionSlot} house
+query {queryType} does {questionSlot} live
+query {queryType} does {questionSlot} sit

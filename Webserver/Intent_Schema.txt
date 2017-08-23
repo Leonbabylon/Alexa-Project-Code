@@ -1,0 +1,72 @@
+{
+  "intents": [
+    {
+      "intent": "AMAZON.CancelIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "member",
+          "type": "operatorSlot"
+        },
+        {
+          "name": "property",
+          "type": "operatorSlot"
+        }
+      ],
+      "intent": "directmember"
+    },
+    {
+      "intent": "getANewFact"
+    },
+    {
+      "slots": [
+        {
+          "name": "member",
+          "type": "operatorSlot"
+        },
+        {
+          "name": "position",
+          "type": "positionSlot"
+        }
+      ],
+      "intent": "locationmember"
+    },
+    {
+      "slots": [
+        {
+          "name": "member",
+          "type": "operatorSlot"
+        },
+        {
+          "name": "property",
+          "type": "operatorSlot"
+        },
+        {
+          "name": "location",
+          "type": "locationSlot"
+        }
+      ],
+      "intent": "nextmember"
+    },
+    {
+      "slots": [
+        {
+          "name": "questionSlot",
+          "type": "operatorSlot"
+        },
+        {
+          "name": "queryType",
+          "type": "querydetail"
+        }
+      ],
+      "intent": "query"
+    }
+  ]
+}
