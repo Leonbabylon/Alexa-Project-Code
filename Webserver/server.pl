@@ -37,7 +37,7 @@ handle_dict(DictIn,DictOut) :-
 handle_dict(_DictIn,DictOut):-
 	DictOut = _{
 	      shouldEndSession: false,
-	      response: _{outputSpeech:_{type: "PlainText", text: "Error Id did not match"}},
+	      response: _{outputSpeech:_{type: "PlainText", text: "Skill Id did not match"}},
               version:"1.0"
 	     }.
 
@@ -52,41 +52,6 @@ intent_dictOut("getANewFact",_,DictOut):-
 	answers(RandomMessage),
 	my_json_answer(RandomMessage,DictOut).
 
-intent_dictOut("remember",DictIn,DictOut):-
-	get_dict(session,DictIn,SessionObject),
-	get_dict(sessionId,SessionObject,SessionId),
-	get_dict(request,DictIn,RequestObject),
-	get_dict(intent,RequestObject,IntentObject),
-	get_dict(slots,IntentObject,SlotsObject),
-	get_dict(rememberSlot,SlotsObject,MySlotObject),
-	get_dict(value,MySlotObject,Value),
-	split_string(Value," ","",StringList),
-	maplist(string_lower,StringList,StringListLow),
-	maplist(atom_string,AtomList,StringListLow),
-	(phrase(sentence(Rule),AtomList) ->
-	 (assertz(sessionid_fact(SessionId,Rule)),
-	  my_json_answer(Value,DictOut));
-	  my_json_answer(Value,DictOut)).
-
-intent_dictOut("question",DictIn,DictOut):-
-	writeln(user_error,walrus),
-	get_dict(session,DictIn,SessionObject),
-	get_dict(sessionId,SessionObject,SessionId),
-	get_dict(request,DictIn,RequestObject),
-	get_dict(intent,RequestObject,IntentObject),
-	get_dict(slots,IntentObject,SlotsObject),
-	get_dict(questionSlot,SlotsObject,MySlotObject),
-	get_dict(value,MySlotObject,Value),
-	portray_clause(user_error,Value),
-	((
-	  split_string(Value," ","",StringList),
-	  maplist(string_lower,StringList,StringListLow),
-	  maplist(atom_string,AtomList,StringListLow),
-
-	  phrase(question(Query),AtomList),prove_question(Query,SessionId,Answer)) ->
-	 my_json_answer(Answer,DictOut);
-	 my_json_answer(Value,DictOut)
-	).
 intent_dictOut("directmember",DictIn,DictOut):-
 		writeln(user_error,fishboy),
 		get_dict(session,DictIn,	SessionObject),
